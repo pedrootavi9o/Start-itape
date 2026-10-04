@@ -51,6 +51,135 @@
     .glow-orange:hover {
       box-shadow: 0 0 25px rgba(255, 102, 0, 0.4);
     }
+
+    /* Keyframes e Animações Microinterativas */
+    @keyframes pulse-subtle {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 102, 0, 0.35);
+      }
+      50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 16px 4px rgba(255, 102, 0, 0.2);
+      }
+    }
+    .animate-pulse-subtle {
+      animation: pulse-subtle 3.2s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-150%) skewX(-20deg);
+      }
+      35%, 100% {
+        transform: translateX(250%) skewX(-20deg);
+      }
+    }
+    .shimmer-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .shimmer-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 45%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+      animation: shimmer 4.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float-slow {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+    @keyframes float-slow-alt {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(7px);
+      }
+    }
+    .animate-float-1 {
+      animation: float-slow 5s ease-in-out infinite;
+    }
+    .animate-float-2 {
+      animation: float-slow-alt 6s ease-in-out infinite;
+    }
+
+    @keyframes cart-bounce {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      20% { transform: scale(1.3) rotate(-12deg); }
+      40% { transform: scale(1.2) rotate(10deg); }
+      60% { transform: scale(1.15) rotate(-6deg); }
+      80% { transform: scale(1.05) rotate(2deg); }
+    }
+    .animate-cart-bounce {
+      animation: cart-bounce 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Card de produto hover dinâmico */
+    .product-card-anim {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+    .product-card-anim:hover {
+      transform: translateY(-5px) scale(1.015);
+      box-shadow: 0 14px 35px -8px rgba(255, 102, 0, 0.25), 0 0 15px 1px rgba(255, 102, 0, 0.12);
+      border-color: rgba(255, 102, 0, 0.75);
+    }
+
+    /* Botões de numeração táteis */
+    .size-btn-pill {
+      transition: transform 0.18s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .size-btn-pill:hover:not(.active-size) {
+      transform: translateY(-2px) scale(1.06);
+      border-color: rgba(255, 102, 0, 0.85);
+      background-color: #1a1a1a;
+      box-shadow: 0 4px 10px rgba(255, 102, 0, 0.25);
+    }
+    .size-btn-pill:active {
+      transform: scale(0.94);
+    }
+
+    /* Scroll Reveal Transition Class */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-item.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Redução de movimento acessível */
+    @media (prefers-reduced-motion: reduce) {
+      .animate-pulse-subtle,
+      .shimmer-btn::after,
+      .animate-float-1,
+      .animate-float-2,
+      .animate-cart-bounce {
+        animation: none !important;
+      }
+      .reveal-item {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .product-card-anim:hover {
+        transform: none !important;
+      }
+    }
+
     /* Estilização suave para scrollbars */
     ::-webkit-scrollbar {
       width: 8px;
@@ -79,8 +208,8 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
 <!-- LOGO OFICIAL -->
 <a class="flex items-center gap-2.5 sm:gap-3 group" href="#hero">
-<div class="relative w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full overflow-hidden border-2 border-brand-orange/50 shadow-lg group-hover:border-brand-orange transition-all flex-shrink-0">
-<img alt="START ITAPE Logo Leão" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4eALZU_lEMA7Dmor-h_QPEn7bv6t1EjnQnimNzcGx8ycEy2Ai63wgaoJK0a7FLyrOsNK_GEjnd3SV6ZUsopfoGjbcOJplrnPihteccYenjqGPU4jqcaBAw-f173NlaHZ6Tz-vFPy1iir1afO-qExZWc8pX6rgP4YhsMWaA9ox0eKSNua9d_I4UY7kEZ3SZjHYx4KMF2F5yUVB4lgMHy-IXKqKQ3Oh_nsYglhZTnp9BlLmWx_3nkuYD_YiWCINcAfif8A"/>
+<div class="relative w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full overflow-hidden border-2 border-brand-orange/50 shadow-lg group-hover:border-brand-orange group-hover:scale-105 transition-all duration-300 flex-shrink-0">
+<img alt="START ITAPE Logo Leão" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLyDsC3Si9Ajac1db-F8MSJHYAgYJ5PELWOw45tKlJINgeBbLCRFcIGfLdWQ0QvOnHWuy0P8BPu8K-7gKNAWD0OeV1djMB_XSKzRd9khSioXn28wJ4dj8fhd5fwMNZ2PMXZOe2Rn73zNyLO8UV-CsOprXjTJBvXUXZ_bgEHoc3Auj_0n5e7WRTGJak3HBi9ViKt0sOrYOhIPob_3i5kWkLXthiLz5h4jIbhBRyz93-sHJcn85en_S1YNCQAgwj-l2ziXs"/>
 </div>
 <div class="flex flex-col text-left">
 <span class="font-display font-black text-lg sm:text-xl md:text-2xl tracking-tighter text-white uppercase italic leading-none group-hover:text-brand-orange transition-colors">
@@ -100,13 +229,13 @@
 <!-- BOTÃO INSTAGRAM, CARRINHO & CONTADOR -->
 <div class="flex items-center gap-2 sm:gap-3">
 <!-- Link Instagram no Topo -->
-<a aria-label="Instagram Start Itape" class="text-gray-300 hover:text-brand-orange bg-brand-card hover:bg-brand-border border border-brand-border w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all glow-orange" href="https://www.instagram.com/start_itape/" rel="noopener noreferrer" target="_blank" title="Siga nosso Instagram @start_itape">
+<a aria-label="Instagram Start Itape" class="text-gray-300 hover:text-brand-orange bg-brand-card hover:bg-brand-border border border-brand-border w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 glow-orange" href="https://www.instagram.com/start_itape/" rel="noopener noreferrer" target="_blank" title="Siga nosso Instagram @start_itape">
 <i class="fa-brands fa-instagram text-base sm:text-lg"></i>
 </a>
-<button aria-label="Abrir Carrinho" class="relative bg-brand-card hover:bg-brand-border border border-brand-border text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl font-bold flex items-center gap-2 sm:gap-2.5 transition-all glow-orange group" id="cartBtn" onclick="toggleCart()">
-<div class="relative">
-<i class="fa-solid fa-bag-shopping text-brand-orange text-base sm:text-lg group-hover:scale-110 transition-transform"></i>
-<span class="absolute -top-2 -right-3 bg-brand-orange text-black font-black text-[10px] sm:text-[11px] w-4.5 h-4.5 sm:w-5 sm:h-5 rounded-full flex items-center justify-center shadow-lg transition-transform" id="cartCountBadge">0</span>
+<button aria-label="Abrir Carrinho" class="relative bg-brand-card hover:bg-brand-border border border-brand-border text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl font-bold flex items-center gap-2 sm:gap-2.5 transition-all duration-200 hover:-translate-y-0.5 glow-orange group" id="cartBtn" onclick="toggleCart()">
+<div class="relative" id="cartIconContainer">
+<i class="fa-solid fa-bag-shopping text-brand-orange text-base sm:text-lg group-hover:scale-110 transition-transform duration-200" id="cartHeaderIcon"></i>
+<span class="absolute -top-2 -right-3 bg-brand-orange text-black font-black text-[10px] sm:text-[11px] w-4.5 h-4.5 sm:w-5 sm:h-5 rounded-full flex items-center justify-center shadow-lg transition-transform duration-300" id="cartCountBadge">0</span>
 </div>
 <span class="hidden sm:inline text-xs uppercase tracking-wider font-extrabold ml-1">Meu Carrinho</span>
 </button>
@@ -121,8 +250,8 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-20 relative z-10">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
 <!-- TEXTO E PROMOÇÃO HERO (Alinhamento natural text-left no mobile e desktop) -->
-<div class="lg:col-span-6 space-y-5 sm:space-y-6 text-left">
-<div class="inline-flex items-center gap-2 bg-brand-orange/10 border border-brand-orange/30 px-3.5 py-1.5 rounded-full">
+<div class="lg:col-span-6 space-y-5 sm:space-y-6 text-left reveal-item">
+<div class="inline-flex items-center gap-2 bg-brand-orange/10 border border-brand-orange/30 px-3.5 py-1.5 rounded-full animate-pulse-subtle">
 <span class="w-2 h-2 rounded-full bg-brand-orange animate-ping flex-shrink-0"></span>
 <span class="text-brand-orange font-bold text-xs uppercase tracking-wider text-left">Promoção por tempo limitado enquanto durarem os estoques</span>
 </div>
@@ -134,7 +263,7 @@
             Os tênis mais desejados do streetwear nacional e internacional em Itapetininga - SP. Qualidade premium, visual autêntico e acabamento impecável com preço imbatível.
           </p>
 <!-- PREÇO DE DESTAQUE COM ESTILO DO ANÚNCIO (w-full sm:max-w-md, text-left) -->
-<div class="bg-gradient-to-br from-brand-card to-brand-black border border-brand-orange/40 rounded-2xl p-4 sm:p-6 shadow-2xl relative w-full sm:max-w-md text-left">
+<div class="bg-gradient-to-br from-brand-card to-brand-black border border-brand-orange/40 rounded-2xl p-4 sm:p-6 shadow-2xl relative w-full sm:max-w-md text-left transform transition-transform duration-300 hover:scale-[1.01]">
 <div class="flex items-center justify-between gap-3">
 <div class="text-left">
 <span class="text-[11px] sm:text-xs uppercase font-extrabold tracking-widest text-brand-orange block">Tempo Limitado • Start Itape</span>
@@ -153,52 +282,52 @@
 <i class="fa-solid fa-location-dot flex-shrink-0"></i> Mercado Municipal, Box 15, Itapetininga - SP
             </p>
 </div>
-<!-- BOTÃO CTA DE ALTA CONVERSÃO (w-full sm:w-auto, mantendo toque confortável) -->
+<!-- BOTÃO CTA DE ALTA CONVERSÃO COM SHIMMER -->
 <div class="pt-2 flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center justify-start">
-<a class="w-full sm:w-auto bg-brand-orange hover:bg-brand-orangeHover text-black font-display font-black text-base md:text-lg px-6 sm:px-8 py-4 rounded-xl shadow-xl hover:shadow-orange-500/25 transition-all transform hover:-translate-y-0.5 uppercase tracking-wider text-center flex items-center justify-center gap-3" href="#produtos">
-<span>COMPRAR AGORA</span>
-<i class="fa-solid fa-arrow-down"></i>
+<a class="shimmer-btn w-full sm:w-auto bg-brand-orange hover:bg-brand-orangeHover text-black font-display font-black text-base md:text-lg px-6 sm:px-8 py-4 rounded-xl shadow-xl hover:shadow-orange-500/30 transition-all transform hover:-translate-y-1 active:scale-95 uppercase tracking-wider text-center flex items-center justify-center gap-3" href="#produtos">
+<span class="relative z-10">COMPRAR AGORA</span>
+<i class="fa-solid fa-arrow-down relative z-10 animate-bounce"></i>
 </a>
-<a class="w-full sm:w-auto bg-brand-card hover:bg-brand-border border border-brand-border text-white font-bold text-sm sm:text-sm md:text-base px-5 sm:px-6 py-4 rounded-xl transition-all text-center flex items-center justify-center gap-2" href="https://wa.me/5515992760062" rel="noopener noreferrer" target="_blank">
+<a class="w-full sm:w-auto bg-brand-card hover:bg-brand-border border border-brand-border text-white font-bold text-sm sm:text-sm md:text-base px-5 sm:px-6 py-4 rounded-xl transition-all transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2" href="https://wa.me/5515992760062" rel="noopener noreferrer" target="_blank">
 <i class="fa-brands fa-whatsapp text-emerald-400 text-lg flex-shrink-0"></i>
 <span>Falar com Atendente: +55 (15) 99276-0062</span>
 </a>
 </div>
 </div>
-<!-- MOCKUP / COMPOSIÇÃO DOS ANÚNCIOS REAIS -->
-<div class="lg:col-span-6 relative mt-4 lg:mt-0">
+<!-- MOCKUP / COMPOSIÇÃO DOS ANÚNCIOS REAIS COM FLOAT SUAVE -->
+<div class="lg:col-span-6 relative mt-4 lg:mt-0 reveal-item">
 <div class="relative mx-auto max-w-md lg:max-w-none">
 <!-- Cards de demonstração das campanhas reais fornecidas -->
 <div class="relative z-10 grid grid-cols-2 gap-3 sm:gap-4">
-<div class="space-y-3 sm:space-y-4">
+<div class="space-y-3 sm:space-y-4 animate-float-1">
 <div class="group relative rounded-2xl overflow-hidden border border-brand-border hover:border-brand-orange transition-all duration-300 shadow-xl bg-brand-card">
-<img alt="Adidas Campus Start Itape" class="w-full h-48 sm:h-64 object-cover object-top group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1ZUK_Xz0ySvvVAKxoN2Oj8r9BODQVbdfoDUUoSTGC2DB3lCBV58QEkcOViIDdaMv_ApmEDEe3VUPnMrMU9kCh7nzvcRzkA8Dz28LQ3LKFBvxrdhf5-_ZPJXP-0beXcsdYN-jl8ZjXWB3pWya8TNrMNGX2RE_6j7buUPhfJAWE1FFdUZAsRSF2FCUsnIEQNQ1oATTnzxJxByn_W0oeYSQLXx9Zfcksd2cR8f-gzbb5AERjySDnfCv2Kh3aCcVPgP87nDQ"/>
+<img alt="Adidas Campus Start Itape" class="w-full h-48 sm:h-64 object-cover object-top group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHRhR5GjXl2Pn8EHQjq0q3pr_aby-eMQPVNbFZVhQ5u1ufibXuQt445aODn00NnOlWGI9xpupT7zeagjKZJJHZ-6GDjUcXdCvijkyiOWc8y7Aet3duMwsVSMJyKB966ajQs_dTamEumP7Q_GYs_Ey8XNIcPgzXtat7x4UTeuMNgGfjpqVmta8nsCvQ7N8zeihQ-kCaA2seJiVByo5niTXJ5dFbOhuEpV1S-nwfNcQXNcUq05Sf8hwEPrRwhl_qgauJ53M"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5 sm:p-3 text-left">
 <span class="font-display font-black text-[11px] sm:text-xs uppercase tracking-wide text-white text-left">Adidas Campus • R$ 74,90</span>
 </div>
 </div>
-<div class="bg-brand-card border border-brand-orange/30 p-3 sm:p-4 rounded-2xl text-center">
+<div class="bg-brand-card border border-brand-orange/30 p-3 sm:p-4 rounded-2xl text-center transform transition-transform hover:scale-105">
 <span class="text-brand-orange font-black text-lg sm:text-xl font-display uppercase tracking-wider block">100% ORIGINAL</span>
 <span class="text-[11px] sm:text-xs text-gray-400 uppercase">Qualidade e Acabamento TOP</span>
 </div>
 </div>
-<div class="space-y-3 sm:space-y-4 pt-4 sm:pt-6">
+<div class="space-y-3 sm:space-y-4 pt-4 sm:pt-6 animate-float-2">
 <div class="group relative rounded-2xl overflow-hidden border border-brand-border hover:border-brand-orange transition-all duration-300 shadow-xl bg-brand-card">
-<img alt="New Balance Start Itape" class="w-full h-48 sm:h-64 object-cover object-top group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGpiFDPbq86QXencgFNxwjPgaQ_81esXATTKYMDKfzMCXslzGr2qDvolHiv8vL4h8-LuzNF0K-jKkn3yVYNtF11d5vxK4oUqhv5gb0345Whd3j-uk5JJfBNt67DchSsZwVeI0A0C5QzVozrDMEVxrZvmuiDzRZY8Scr_NX-P9VyI8-94MxvID07hvgcmhf3EHDGYUkF8SidDBsWQtNUabJRBznE4RuRipiKh2WHtxv3kf1gxLgVotLIciyGEXa3HdRFB0"/>
+<img alt="New Balance Start Itape" class="w-full h-48 sm:h-64 object-cover object-top group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-puZBLv89RPjB4cZVKNi8la3O9weNnt90MUK8HKzf6rO-cpi_mH_67Q3bvUQc6ZmWapqHLylkaeSMLOA0s8MGTEJXm9M_u-TIiWUeKgam6nPnSfHosbJ6CzTZxD8aA8znGHmgb80VnV4sY8H39tznDCN9B9DFWXqOCPZ7YVRyeGA_ekX6RJnARyT_CD2j9C9BwFojdXeLfbxdOWejOTmFs4C2fo16KKArY7op9na4C9ylhMClIyDCCj7xhG2mYzmsbu0"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5 sm:p-3 text-left">
 <span class="font-display font-black text-[11px] sm:text-xs uppercase tracking-wide text-white text-left">New Balance • R$ 74,90</span>
 </div>
 </div>
 <div class="group relative rounded-2xl overflow-hidden border border-brand-border hover:border-brand-orange transition-all duration-300 shadow-xl bg-brand-card">
-<img alt="Tesla Footwear Start Itape" class="w-full h-28 sm:h-36 object-cover object-top group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_cnely_8BEcBzx9LUcBw1MHV5LQmzjg9qqOTvz-cy72mZHBW-J841_WDqhFx-0IF21xggJXbeMHzR4qcbQgaAUS8-OJDI98q7_uDafiTyVOVSn3Ki_q_T74LhxzLp3l8WhaRakwCZr9cm0ihJWgrZgY9F6U2O3NpGbl4V3xLFqgCt-CInI5ZbsNssfaso6ap1qry7Bk-Dky9QqL--sgjoKoZutLSNJx6SurF-3HtiurE8M7GQ-Wld7D0eAaWbRrrlk1w"/>
+<img alt="Tesla Footwear Start Itape" class="w-full h-28 sm:h-36 object-cover object-top group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPe2lkvG8ML5p0EDtp92Qu6OvhdwJJt-GVY8bl-S_etjKMDOSh8CDuziriXaCsVXMkTC3DE5AJqlWdxYRDPmFDwZLxG5mcNEX_RSi9d-u9Z2nNPWz-L9RvYuxTICmLt6F0XtKUKIBEGwcNRwVRL7pGrlJ-RhvhDK5NU8PmBE4qSCSsR1RScC8MmgGg24OktU6Erjd4tAZkXAJ5wQyysjD7KSjvaggX29YCWoWdOjLHfexXdBbD3mJ83UJCpD-1FSn0FoQ"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2 sm:p-2.5 text-left">
 <span class="font-display font-black text-[10px] sm:text-[11px] uppercase tracking-wide text-white text-left">Tesla Footwear</span>
 </div>
 </div>
 </div>
 </div>
-<!-- Selo Flutuante Corrigido para Itapetininga / SP -->
-<div class="mt-4 sm:mt-0 sm:absolute sm:-bottom-6 sm:-left-6 z-20 bg-brand-orange text-black font-display font-black p-3 sm:p-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border-2 border-white/20 text-left">
+<!-- Selo Flutuante com pulse-subtle -->
+<div class="mt-4 sm:mt-0 sm:absolute sm:-bottom-6 sm:-left-6 z-20 bg-brand-orange text-black font-display font-black p-3 sm:p-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border-2 border-white/20 text-left animate-pulse-subtle">
 <i class="fa-solid fa-crown text-xl sm:text-2xl flex-shrink-0"></i>
 <div class="text-left">
 <span class="block text-[11px] sm:text-xs uppercase leading-tight font-extrabold text-left">Destaque Itapetininga - SP</span>
@@ -210,14 +339,14 @@
 </div>
 </div>
 </section>
-<!-- 3. SELOS DE CONFIANÇA (Cards com alinhamento text-left natural em telas pequenas) -->
+<!-- 3. SELOS DE CONFIANÇA (Cards com alinhamento text-left e microinteração de hover) -->
 <section class="bg-brand-dark border-b border-brand-border py-8" id="beneficios">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
 <!-- Benefício 1 -->
-<div class="flex items-center gap-4 bg-brand-card p-4 sm:p-5 rounded-2xl border border-brand-border hover:border-brand-orange/50 transition-colors text-left">
-<div class="w-12 h-12 rounded-xl bg-brand-orange/10 border border-brand-orange/30 flex items-center justify-center flex-shrink-0">
-<i class="fa-solid fa-shield-halved text-brand-orange text-2xl"></i>
+<div class="reveal-item flex items-center gap-4 bg-brand-card p-4 sm:p-5 rounded-2xl border border-brand-border hover:border-brand-orange/60 hover:-translate-y-1 transition-all duration-300 shadow-md hover:shadow-orange-500/10 text-left group">
+<div class="w-12 h-12 rounded-xl bg-brand-orange/10 border border-brand-orange/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-brand-orange/20 transition-all duration-300">
+<i class="fa-solid fa-shield-halved text-brand-orange text-2xl group-hover:scale-105 transition-transform"></i>
 </div>
 <div class="text-left">
 <h4 class="font-display font-black text-sm uppercase tracking-wide text-white text-left">Qualidade Comprovada</h4>
@@ -225,9 +354,9 @@
 </div>
 </div>
 <!-- Benefício 2 -->
-<div class="flex items-center gap-4 bg-brand-card p-4 sm:p-5 rounded-2xl border border-brand-border hover:border-brand-orange/50 transition-colors text-left">
-<div class="w-12 h-12 rounded-xl bg-brand-orange/10 border border-brand-orange/30 flex items-center justify-center flex-shrink-0">
-<i class="fa-solid fa-truck-fast text-brand-orange text-2xl"></i>
+<div class="reveal-item flex items-center gap-4 bg-brand-card p-4 sm:p-5 rounded-2xl border border-brand-border hover:border-brand-orange/60 hover:-translate-y-1 transition-all duration-300 shadow-md hover:shadow-orange-500/10 text-left group">
+<div class="w-12 h-12 rounded-xl bg-brand-orange/10 border border-brand-orange/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-brand-orange/20 transition-all duration-300">
+<i class="fa-solid fa-truck-fast text-brand-orange text-2xl group-hover:scale-105 transition-transform"></i>
 </div>
 <div class="text-left">
 <h4 class="font-display font-black text-sm uppercase tracking-wide text-white text-left">Separação Imediata</h4>
@@ -235,9 +364,9 @@
 </div>
 </div>
 <!-- Benefício 3 -->
-<div class="flex items-center gap-4 bg-brand-card p-4 sm:p-5 rounded-2xl border border-brand-border hover:border-brand-orange/50 transition-colors text-left">
-<div class="w-12 h-12 rounded-xl bg-brand-orange/10 border border-brand-orange/30 flex items-center justify-center flex-shrink-0">
-<i class="fa-solid fa-store text-brand-orange text-2xl"></i>
+<div class="reveal-item flex items-center gap-4 bg-brand-card p-4 sm:p-5 rounded-2xl border border-brand-border hover:border-brand-orange/60 hover:-translate-y-1 transition-all duration-300 shadow-md hover:shadow-orange-500/10 text-left group">
+<div class="w-12 h-12 rounded-xl bg-brand-orange/10 border border-brand-orange/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-brand-orange/20 transition-all duration-300">
+<i class="fa-solid fa-store text-brand-orange text-2xl group-hover:scale-105 transition-transform"></i>
 </div>
 <div class="text-left">
 <h4 class="font-display font-black text-sm uppercase tracking-wide text-white text-left">Retirada em Loja Física</h4>
@@ -247,16 +376,16 @@
 </div>
 </div>
 </section>
-<!-- SEÇÃO NOVO: GRUPO VIP DO WHATSAPP (text-left no mobile com botão w-full) -->
+<!-- SEÇÃO NOVO: GRUPO VIP DO WHATSAPP (com botão Shimmer) -->
 <section class="bg-gradient-to-r from-amber-600/20 via-brand-orange/25 to-yellow-600/20 border-b border-brand-orange/30 py-8 relative overflow-hidden" id="grupovip">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-<div class="bg-brand-card/90 backdrop-blur-md border-2 border-brand-orange/50 rounded-2xl p-5 sm:p-6 md:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 shadow-2xl text-left">
+<div class="reveal-item bg-brand-card/90 backdrop-blur-md border-2 border-brand-orange/50 rounded-2xl p-5 sm:p-6 md:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 shadow-2xl text-left hover:border-brand-orange transition-colors">
 <div class="flex items-start sm:items-center gap-4 sm:gap-5 text-left flex-row">
 <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-brand-orange text-black flex items-center justify-center text-2xl sm:text-3xl shadow-lg flex-shrink-0 animate-pulse">
 <i class="fa-brands fa-whatsapp"></i>
 </div>
 <div class="text-left">
-<div class="inline-flex items-center gap-2 bg-yellow-400/20 text-yellow-400 text-[11px] font-black uppercase px-2.5 py-0.5 rounded-full mb-1.5 border border-yellow-400/30">
+<div class="inline-flex items-center gap-2 bg-yellow-400/20 text-yellow-400 text-[11px] font-black uppercase px-2.5 py-0.5 rounded-full mb-1.5 border border-yellow-400/30 animate-pulse-subtle">
 <i class="fa-solid fa-crown text-[10px]"></i> Acesso Exclusivo
             </div>
 <h3 class="font-display font-black text-xl sm:text-2xl md:text-3xl text-white uppercase italic tracking-tight text-left">
@@ -268,9 +397,9 @@
 </div>
 </div>
 <div class="flex-shrink-0 w-full sm:w-auto">
-<a class="w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-black font-display font-black text-sm md:text-base px-6 sm:px-8 py-4 rounded-xl shadow-xl transition-all transform hover:scale-105 uppercase tracking-wider text-center flex items-center justify-center gap-3" href="https://wa.me/5515992760062?text=Ol%C3%A1!%20Gostaria%20de%20entrar%20no%20Grupo%20VIP%20de%20promocoes%20da%20START%20ITAPE!" rel="noopener noreferrer" target="_blank">
-<i class="fa-brands fa-whatsapp text-2xl flex-shrink-0"></i>
-<span>Entrar no Grupo VIP do WhatsApp</span>
+<a class="shimmer-btn w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-black font-display font-black text-sm md:text-base px-6 sm:px-8 py-4 rounded-xl shadow-xl transition-all transform hover:scale-105 hover:-translate-y-0.5 active:scale-95 uppercase tracking-wider text-center flex items-center justify-center gap-3" href="https://wa.me/5515992760062?text=Ol%C3%A1!%20Gostaria%20de%20entrar%20no%20Grupo%20VIP%20de%20promocoes%20da%20START%20ITAPE!" rel="noopener noreferrer" target="_blank">
+<i class="fa-brands fa-whatsapp text-2xl flex-shrink-0 relative z-10"></i>
+<span class="relative z-10">Entrar no Grupo VIP do WhatsApp</span>
 </a>
 </div>
 </div>
@@ -280,8 +409,8 @@
 <main class="py-12 sm:py-16 bg-brand-black flex-grow" id="produtos">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <!-- Cabeçalho da Seção (Centralizado como solicitado) -->
-<div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
-<span class="text-brand-orange font-display font-black text-xs tracking-widest uppercase bg-brand-orange/10 border border-brand-orange/20 px-3 py-1 rounded-full inline-block mb-3">
+<div class="reveal-item text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+<span class="animate-pulse-subtle text-brand-orange font-display font-black text-xs tracking-widest uppercase bg-brand-orange/10 border border-brand-orange/20 px-3 py-1 rounded-full inline-block mb-3">
           Promoção por tempo limitado enquanto durarem os estoques
         </span>
 <h2 class="font-display font-black text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight text-white italic">
@@ -291,7 +420,7 @@
           Selecione sua cor favorita e o seu tamanho para adicionar ao carrinho. Todos os tênis com valor promocional de <span class="text-brand-orange font-bold">R$ 74,90</span> (por tempo limitado).
         </p>
 </div>
-<!-- GRID DE PRODUTOS (Cards alinhados à esquerda) -->
+<!-- GRID DE PRODUTOS (Cards renderizados via JS com animação de reveal e hover microinterativo) -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="productsGrid">
 <!-- Renderizado dinamicamente via JS -->
 </div>
@@ -299,8 +428,8 @@
 </main>
 <!-- BANNER INFORMATIVO RETIRADA NA LOJA (Títulos centralizados com paddings responsivos) -->
 <section class="bg-gradient-to-r from-brand-card via-brand-dark to-brand-card border-y border-brand-border py-10 sm:py-12">
-<div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
-<div class="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-brand-orange/20 rounded-full border border-brand-orange/40 text-brand-orange text-xl sm:text-2xl mb-4">
+<div class="reveal-item max-w-5xl mx-auto px-4 sm:px-6 text-center">
+<div class="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-brand-orange/20 rounded-full border border-brand-orange/40 text-brand-orange text-xl sm:text-2xl mb-4 transition-transform hover:scale-110 duration-300">
 <i class="fa-solid fa-store"></i>
 </div>
 <h3 class="font-display font-black text-xl sm:text-2xl md:text-3xl uppercase tracking-tight text-white leading-tight">
@@ -309,7 +438,7 @@
 <p class="text-gray-300 text-xs sm:text-sm md:text-base max-w-2xl mx-auto mt-2 leading-relaxed">
         Faça sua reserva agora pelo site para garantir o seu par no valor promocional de <b class="text-brand-orange">R$ 74,90</b> (Promoção por tempo limitado). Seu pedido será separado imediatamente e você retira com atendimento VIP!
       </p>
-<div class="mt-5 inline-flex items-center gap-2 text-xs uppercase font-extrabold tracking-wider bg-brand-black px-4 py-2.5 rounded-xl border border-brand-border text-gray-300 text-left">
+<div class="mt-5 inline-flex items-center gap-2 text-xs uppercase font-extrabold tracking-wider bg-brand-black px-4 py-2.5 rounded-xl border border-brand-border text-gray-300 text-left transition-all hover:border-brand-orange/50 hover:bg-brand-card">
 <i class="fa-solid fa-map-pin text-brand-orange flex-shrink-0"></i>
 <span>Itapetininga / SP • Loja Oficial START ITAPE</span>
 </div>
@@ -321,17 +450,17 @@
 <!-- Coluna 1: Marca & Instagram -->
 <div class="space-y-4 text-left">
 <div class="flex items-center gap-3">
-<img alt="Start Itape" class="w-10 h-10 rounded-full border border-brand-orange flex-shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGpcAIVO1ZBbdEao18L4D7cpW0ASnaFaDp5OGCYPXY5a4vOG-tNsdR7_2-LBplSmk4B3M8LWi2TKLZwiWYhjSoX61XF0h_MqXhhJC5ZP1wA-8DV3NDpyeIIQ0UESemxI8_Q3MqBNcAd2aDrlZbKQDd5C-RcroJHVfN-aSR2rksgolY9Au6ZqDcGFSlcgMT93kupQkbsctdecrcqtpJRmn8hJXIg9vQgN5zUc2N-OsnGxX3V1EPGrbBL_-l8CLnlhGF5AY"/>
+<img alt="Start Itape" class="w-10 h-10 rounded-full border border-brand-orange flex-shrink-0 transition-transform hover:rotate-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv2isPUt9ghMsez0_YmkhbLhtzDveNngyoIzt1qPIlaqCW1zCH8F1ALvZnWiiXMBhWqzmOgpRP4dgo-30GnLMll7qpXfz41v3HVj-4s6son_7EzyAdlkHE2HU4PT6258DG5haJc4oUa7dkdj9ZBXZcaJV5wOK1ahXE8WMM6JoN2ytNZgyAVge1HXNUSpw1Q88mw2tvGbxAFSTJomYGD_x7Q2b-ykwKGK9nDtybRoHM2WBVelUfsJEIqW84cPj9d2sY_fk"/>
 <span class="font-display font-black text-xl text-white uppercase italic">START <span class="text-brand-orange">ITAPE</span></span>
 </div>
 <p class="text-xs text-gray-400 leading-relaxed text-left">
           Para quem vive o seu estilo. A loja de calçados streetwear referência em conforto, atitude e os melhores preços de Itapetininga - SP e região.
         </p>
 <div class="flex items-center gap-3 pt-1">
-<a class="w-10 h-10 rounded-xl bg-brand-card flex items-center justify-center text-emerald-400 hover:text-white hover:bg-emerald-600 border border-brand-border transition-colors flex-shrink-0" href="https://wa.me/5515992760062" rel="noopener noreferrer" target="_blank" title="WhatsApp Oficial">
+<a class="w-10 h-10 rounded-xl bg-brand-card flex items-center justify-center text-emerald-400 hover:text-white hover:bg-emerald-600 border border-brand-border hover:-translate-y-0.5 transition-all duration-200 flex-shrink-0" href="https://wa.me/5515992760062" rel="noopener noreferrer" target="_blank" title="WhatsApp Oficial">
 <i class="fa-brands fa-whatsapp text-lg"></i>
 </a>
-<a class="flex items-center gap-2 px-3 py-2 rounded-xl bg-brand-card hover:bg-brand-border border border-brand-border text-white hover:text-brand-orange transition-colors" href="https://www.instagram.com/start_itape/" rel="noopener noreferrer" target="_blank" title="Instagram Oficial @start_itape">
+<a class="flex items-center gap-2 px-3 py-2 rounded-xl bg-brand-card hover:bg-brand-border border border-brand-border text-white hover:text-brand-orange hover:-translate-y-0.5 transition-all duration-200" href="https://www.instagram.com/start_itape/" rel="noopener noreferrer" target="_blank" title="Instagram Oficial @start_itape">
 <i class="fa-brands fa-instagram text-brand-orange text-lg"></i>
 <span class="text-xs font-bold font-sans">@start_itape</span>
 </a>
@@ -365,12 +494,12 @@
 </div>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-gray-500 gap-3 text-left">
 <p class="text-left">© 2026 START ITAPE • Itapetininga - SP. Todos os direitos reservados. "Para quem vive o seu estilo."</p>
-<p class="text-[11px] text-left"><a class="hover:text-brand-orange text-gray-400 font-semibold" href="https://www.instagram.com/start_itape/" rel="noopener noreferrer" target="_blank">Instagram @start_itape</a> | Promoção por tempo limitado</p>
+<p class="text-[11px] text-left"><a class="hover:text-brand-orange text-gray-400 font-semibold transition-colors" href="https://www.instagram.com/start_itape/" rel="noopener noreferrer" target="_blank">Instagram @start_itape</a> | Promoção por tempo limitado</p>
 </div>
 </footer>
 <!-- DRAWER / LATERAL DO CARRINHO (MODAL / OVERLAY) -->
 <div class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300 flex justify-end" id="cartOverlay" onclick="closeCartOnBackdrop(event)">
-<div class="w-full max-w-md bg-brand-dark border-l border-brand-border h-full flex flex-col shadow-2xl transform translate-x-full transition-transform duration-300" id="cartDrawer">
+<div class="w-full max-w-md bg-brand-dark border-l border-brand-border h-full flex flex-col shadow-2xl transform translate-x-full transition-transform duration-300 ease-out" id="cartDrawer">
 <!-- Topo do Carrinho -->
 <div class="p-4 sm:p-5 border-b border-brand-border flex items-center justify-between bg-brand-card">
 <div class="flex items-center gap-3 text-left">
@@ -382,7 +511,7 @@
 <span class="text-xs text-gray-400 text-left block" id="cartItemSummary">0 itens no carrinho</span>
 </div>
 </div>
-<button class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-brand-border transition-colors" onclick="toggleCart()">
+<button class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-brand-border transition-colors hover:rotate-90 duration-200" onclick="toggleCart()">
 <i class="fa-solid fa-xmark text-xl"></i>
 </button>
 </div>
@@ -412,11 +541,11 @@
 <span class="text-brand-orange" id="cartTotalPrice">R$ 0,00</span>
 </div>
 </div>
-<button class="w-full bg-brand-orange hover:bg-brand-orangeHover disabled:bg-gray-700 disabled:cursor-not-allowed text-black font-display font-black text-base py-4 rounded-xl uppercase tracking-wider shadow-lg transition-all flex items-center justify-center gap-2" disabled="" id="btnProceedCheckout" onclick="openCheckoutModal()">
-<span>FINALIZAR PEDIDO</span>
-<i class="fa-solid fa-arrow-right"></i>
+<button class="shimmer-btn w-full bg-brand-orange hover:bg-brand-orangeHover disabled:bg-gray-700 disabled:cursor-not-allowed text-black font-display font-black text-base py-4 rounded-xl uppercase tracking-wider shadow-lg transition-all flex items-center justify-center gap-2 transform active:scale-95" disabled="" id="btnProceedCheckout" onclick="openCheckoutModal()">
+<span class="relative z-10">FINALIZAR PEDIDO</span>
+<i class="fa-solid fa-arrow-right relative z-10"></i>
 </button>
-<button class="w-full text-center text-xs font-semibold text-gray-400 hover:text-white uppercase tracking-wider py-1" onclick="toggleCart()">
+<button class="w-full text-center text-xs font-semibold text-gray-400 hover:text-white uppercase tracking-wider py-1 transition-colors" onclick="toggleCart()">
           Continuar Escolhendo
         </button>
 </div>
@@ -424,7 +553,7 @@
 </div>
 <!-- MODAL DE CHECKOUT & FORMULÁRIO COM AVISO DE RETIRADA -->
 <div class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-3 sm:p-4" id="checkoutModal">
-<div class="w-full max-w-lg bg-brand-dark border border-brand-border rounded-2xl shadow-2xl overflow-hidden flex flex-col transform scale-95 transition-transform duration-300" id="checkoutBox">
+<div class="w-full max-w-lg bg-brand-dark border border-brand-border rounded-2xl shadow-2xl overflow-hidden flex flex-col transform scale-95 transition-all duration-300 ease-out" id="checkoutBox">
 <!-- Cabeçalho Modal -->
 <div class="p-4 sm:p-5 bg-brand-card border-b border-brand-border flex items-center justify-between">
 <div class="flex items-center gap-2.5">
@@ -433,7 +562,7 @@
 </div>
 <h3 class="font-display font-black text-lg sm:text-xl text-white uppercase italic text-left">FINALIZE SEU PEDIDO</h3>
 </div>
-<button class="text-gray-400 hover:text-white p-1.5 rounded-lg hover:bg-brand-border" onclick="closeCheckoutModal()">
+<button class="text-gray-400 hover:text-white p-1.5 rounded-lg hover:bg-brand-border hover:rotate-90 transition-all duration-200" onclick="closeCheckoutModal()">
 <i class="fa-solid fa-xmark text-lg"></i>
 </button>
 </div>
@@ -484,9 +613,9 @@
 </div>
 </div>
 <div class="pt-2">
-<button class="w-full bg-emerald-500 hover:bg-emerald-600 text-black font-display font-black text-sm sm:text-base py-3.5 sm:py-4 rounded-xl uppercase tracking-wider shadow-lg shadow-emerald-500/20 transition-all flex items-center justify-center gap-2" type="submit">
-<i class="fa-brands fa-whatsapp text-xl"></i>
-<span>FINALIZAR PEDIDO PELO WHATSAPP</span>
+<button class="shimmer-btn w-full bg-emerald-500 hover:bg-emerald-600 text-black font-display font-black text-sm sm:text-base py-3.5 sm:py-4 rounded-xl uppercase tracking-wider shadow-lg shadow-emerald-500/20 transition-all flex items-center justify-center gap-2 transform active:scale-95" type="submit">
+<i class="fa-brands fa-whatsapp text-xl relative z-10"></i>
+<span class="relative z-10">FINALIZAR PEDIDO PELO WHATSAPP</span>
 </button>
 <p class="text-[11px] text-gray-400 text-center mt-2">
               Você será direcionado diretamente para o número oficial <b>+55 (15) 99276-0062</b>.
@@ -496,9 +625,9 @@
 </div>
 </div>
 </div>
-<!-- TOAST NOTIFICATION -->
-<div class="fixed bottom-6 right-6 z-50 bg-brand-card border-2 border-brand-orange text-white px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl shadow-2xl transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-3 max-w-[90vw] sm:max-w-md" id="toastNotification">
-<i class="fa-solid fa-circle-check text-brand-orange text-lg sm:text-xl flex-shrink-0"></i>
+<!-- TOAST NOTIFICATION NO CANTO SUPERIOR DIREITO COM SLIDE-IN SUAVE -->
+<div class="fixed top-24 right-4 sm:right-6 z-50 bg-brand-card border-2 border-brand-orange text-white px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl shadow-2xl transform translate-x-24 opacity-0 pointer-events-none transition-all duration-300 ease-out flex items-center gap-3 max-w-[92vw] sm:max-w-md" id="toastNotification">
+<i class="fa-solid fa-circle-check text-brand-orange text-lg sm:text-xl flex-shrink-0" id="toastIcon"></i>
 <span class="text-xs font-bold text-left" id="toastMessage">Produto adicionado ao carrinho!</span>
 </div>
 <!-- SCRIPT LOGIC JAVASCRIPT PURO -->
@@ -514,7 +643,7 @@
         category: 'Streetwear Clássico',
         tag: 'Mais Vendido',
         price: 74.90,
-        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAD3WUKKokK8Wa49FUXgKCwjYnN83n-8w6ElAar8TyKqvQTG-7BXgTy_TB48G7G09TUrDTBOf3pF_30T_wHZJHAceLYMGaAaKA_7s66bNk26g-Qd1PbXYqfdaEL5aAP9S_DJig-fy887m_de9hQYvXjgccjtKQY5vRebJKwqFBDFurwbHHfzYmIpQ7CJ4_9nW4PiuA3AekB7GgLa4mAfoHktZtShku6zQ5L_HHRODx4mMwLMdQr9kNNnkwRItiLQNHQn4c',
+        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBc4XcS4XGETL5zIMhqsuxQwOV7ybkjTHykVaPgcVPHBlSE6lK_QNcUR3EIexO8lhOqRlK0Mapu4eauCxsxMVJgEuGhD_2JSVHk9aH-UEsE2_MrEoMOsz8wTw5z427BESpVRkC3NdV3dYjMkPEzpNZenO0vpANlo8IqL1Q7__Hhq_4KMWWGAaHsb7joOMFiEtpWwquoEzEAQF3fI_-UX8EScoOOswTAIvX5LFQOWzAOw086s_-UtPuMxnD4XnuW9U4u03o',
         colors: [
           { name: 'Preto com Listras Brancas', hex: '#ffffff' },
           { name: 'All Black / Cinza Escuro', hex: '#262626' }
@@ -528,7 +657,7 @@
         category: 'Skate & Street Culture',
         tag: 'Destaque',
         price: 74.90,
-        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCT5TSDfCCRnF5Q_1PM4dUrslCwCjCHZ3isGjflPXAr07ikhIlHbmnMFaGBWNYObijJ7-tgMkfZM4iL7L_UtBydCtbQGghfYzq5JRZmR-B_r03soPAvqeJi_dKI0qab6KhM5kDyk1C6bTMqHAPj8bltkyYv_jg4JK2wYECa2CxoqWr2mkD3MMtdhk1ETZz2fNck3Da0PY90S-BZmwHLzhdbFkBQXNUrwG9hqChtrZeuhqoCMcJAGNwh7AT_iTTOh6521QI',
+        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDUR9hIjyYrfiKkyIdIQGdtgUZ6iF33d0IBDh95aP9YJy2NTrdn9PqqFPzVBFqUIcAo0GxeTFdPGZm07W3t3cCQVrG71HX4ILZa6fMjbvCaIZFlBCS7I3D_67n57iXwJvuRnrly27QA1szKB9r5R_seHIr5nCHgZu_4KIcmy-kzw3AhOo6zSGL_72Tn7AEz9Gh5yQPQBeesuKOfldpPKGrfgqg61WM7O6mz_noHcHHeGyG2zfLM_szOAVK5eBa8Cy9Fg6Q',
         colors: [
           { name: 'Preto com Branco', hex: '#f3f4f6' },
           { name: 'All Black', hex: '#171717' },
@@ -544,7 +673,7 @@
         category: 'Lifestyle Urbano',
         tag: 'Novidade',
         price: 74.90,
-        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDEwkACyriOuL8bWr17aaW3PFKg0n3z8CTgdpt7KLcw1NiDYCMQ3f2_-ugRurnHnAqeKOPu9sIlkET9uKSEf4bAy8ZUG79gMQBIOE0A2Uda1dhL7w1SArWqhiTWvsRFgIf9JpvbMMq1sAZ_I-U0BCXAJ_NA_NfaDHod7Iem1uQjZMxX6Z6Cbae65IGvXNG3oDgW30YPMzH2Qp0JEMadaffAS1TmzvklU4r5Oooq3epwuZtYqGvlTr_L9LlXWbufmf4QP-0',
+        image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBiI7OTfkjNmHSK6kSCep2gAraLdF_aeZa4K7-MqXlVkRzlelCelsiecy_CjLwJs7lGFA4GaptE5htTsOZct4NIo2N22N6Ze1iEl9JyilX8bIGhPgr8p9f4vhinKOeZGO6NUNA9EdOykkeqYyquXs6DGKPIk7UOFU4-Q30d4Uyjc63PAleq1bmt2TypcXHycPV2W-4xYHSSoBcWGVbHopWsMKg6Jbw00PKVQivWpaKF48L_B1-c9b0k1Vi-jnITsUANAPA',
         colors: [
           { name: 'Off-White / Creme', hex: '#fdfbf7' },
           { name: 'Preto Texturizado', hex: '#2b2b2b' },
@@ -563,14 +692,38 @@
     document.addEventListener('DOMContentLoaded', () => {
       renderCatalog();
       updateCartUI();
+      initScrollReveal();
     });
 
-    // RENDERIZAR PRODUTOS (Com alinhamento rigorosamente à esquerda nos textos e botões de tamanho responsivos)
+    // INTERSECTION OBSERVER PARA SCROLL REVEAL SUAVE
+    function initScrollReveal() {
+      const items = document.querySelectorAll('.reveal-item');
+      if (!('IntersectionObserver' in window)) {
+        items.forEach(el => el.classList.add('is-revealed'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      items.forEach(el => observer.observe(el));
+    }
+
+    // RENDERIZAR PRODUTOS COM HOVER DINÂMICO E BOTÕES TÁTEIS
     function renderCatalog() {
       const container = document.getElementById('productsGrid');
       container.innerHTML = '';
 
-      PRODUCTS.forEach(product => {
+      PRODUCTS.forEach((product, idx) => {
         // Inicializa opções padrão para o produto
         selectedOptions[product.id] = {
           color: product.colors[0].name,
@@ -578,18 +731,19 @@
         };
 
         const card = document.createElement('div');
-        card.className = "bg-brand-card rounded-2xl border border-brand-border hover:border-brand-orange/60 transition-all duration-300 flex flex-col overflow-hidden shadow-xl group text-left";
+        card.className = "reveal-item product-card-anim bg-brand-card rounded-2xl border border-brand-border flex flex-col overflow-hidden shadow-xl text-left";
+        card.style.transitionDelay = `${idx * 120}ms`;
 
         card.innerHTML = `
           <!-- Imagem e Tag -->
           <div class="relative overflow-hidden bg-brand-dark h-72 sm:h-80 flex items-center justify-center p-3">
-            <span class="absolute top-3 left-3 bg-brand-orange text-black font-display font-black text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-md z-10 shadow">
+            <span class="absolute top-3 left-3 bg-brand-orange text-black font-display font-black text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-md z-10 shadow transition-transform duration-300 hover:scale-105">
               ${product.tag}
             </span>
             <span class="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-gray-300 text-[10px] font-bold px-2 py-1 rounded-md z-10">
               ${product.category}
             </span>
-            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover object-center rounded-xl group-hover:scale-105 transition-transform duration-500">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover object-center rounded-xl group-hover:scale-105 transition-transform duration-700 ease-out">
           </div>
 
           <!-- Informações e Seletores (Alinhamento rigoroso à esquerda) -->
@@ -612,11 +766,11 @@
                 <span id="selected-color-label-${product.id}" class="text-brand-orange font-bold text-[11px] sm:text-xs text-right">${product.colors[0].name}</span>
               </label>
               <div class="flex flex-wrap gap-2 text-left">
-                ${product.colors.map((color, idx) => `
+                ${product.colors.map((color, cIdx) => `
                   <button 
                     type="button" 
                     onclick="selectColor('${product.id}', '${color.name}')" 
-                    class="color-btn-${product.id} text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all ${idx === 0 ? 'bg-brand-orange text-black border-brand-orange font-bold' : 'bg-brand-black text-gray-300 border-brand-border hover:border-gray-500'}"
+                    class="color-btn-${product.id} text-xs font-semibold px-3 py-1.5 rounded-lg border transition-all duration-200 transform hover:scale-105 active:scale-95 ${cIdx === 0 ? 'bg-brand-orange text-black border-brand-orange font-bold shadow-md' : 'bg-brand-black text-gray-300 border-brand-border hover:border-gray-400'}"
                     data-color="${color.name}">
                     ${color.name}
                   </button>
@@ -624,7 +778,7 @@
               </div>
             </div>
 
-            <!-- Seletor de Tamanhos (34 a 43) com grid responsivo e confortável ao toque no mobile -->
+            <!-- Seletor de Tamanhos (34 a 43) com feedback tátil e transição refinada -->
             <div class="space-y-2 text-left">
               <label class="block text-xs uppercase font-extrabold tracking-wider text-gray-300 flex justify-between items-center">
                 <span>Selecione a Numeração:</span>
@@ -635,7 +789,7 @@
                   <button 
                     type="button" 
                     onclick="selectSize('${product.id}', ${size})" 
-                    class="size-btn-${product.id} text-xs font-bold py-2.5 sm:py-2 rounded-lg border border-brand-border bg-brand-black text-gray-300 hover:border-brand-orange transition-all"
+                    class="size-btn-${product.id} size-btn-pill text-xs font-bold py-2.5 sm:py-2 rounded-lg border border-brand-border bg-brand-black text-gray-300 transition-all"
                     data-size="${size}">
                     ${size}
                   </button>
@@ -643,14 +797,14 @@
               </div>
             </div>
 
-            <!-- Botão Adicionar ao Carrinho (w-full) -->
+            <!-- Botão Adicionar ao Carrinho com shimmer sutil -->
             <div class="pt-2">
               <button 
                 type="button" 
                 onclick="addToCart('${product.id}')" 
-                class="w-full bg-brand-orange hover:bg-brand-orangeHover active:scale-[0.98] text-black font-display font-black text-sm py-3.5 rounded-xl uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition-all">
-                <i class="fa-solid fa-cart-plus text-base"></i>
-                <span>ADICIONAR AO CARRINHO</span>
+                class="shimmer-btn w-full bg-brand-orange hover:bg-brand-orangeHover active:scale-[0.97] text-black font-display font-black text-sm py-3.5 rounded-xl uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition-all hover:shadow-orange-500/25">
+                <i class="fa-solid fa-cart-plus text-base relative z-10"></i>
+                <span class="relative z-10">ADICIONAR AO CARRINHO</span>
               </button>
             </div>
 
@@ -669,9 +823,9 @@
       const buttons = document.querySelectorAll(`.color-btn-${productId}`);
       buttons.forEach(btn => {
         if (btn.getAttribute('data-color') === colorName) {
-          btn.className = `color-btn-${productId} text-xs font-bold px-3 py-1.5 rounded-lg border border-brand-orange bg-brand-orange text-black transition-all`;
+          btn.className = `color-btn-${productId} text-xs font-bold px-3 py-1.5 rounded-lg border border-brand-orange bg-brand-orange text-black shadow-md scale-105 transition-all duration-200`;
         } else {
-          btn.className = `color-btn-${productId} text-xs font-semibold px-3 py-1.5 rounded-lg border border-brand-border bg-brand-black text-gray-300 hover:border-gray-500 transition-all`;
+          btn.className = `color-btn-${productId} text-xs font-semibold px-3 py-1.5 rounded-lg border border-brand-border bg-brand-black text-gray-300 hover:border-gray-400 transform hover:scale-105 active:scale-95 transition-all duration-200`;
         }
       });
     }
@@ -685,11 +839,22 @@
       const buttons = document.querySelectorAll(`.size-btn-${productId}`);
       buttons.forEach(btn => {
         if (parseInt(btn.getAttribute('data-size')) === sizeNumber) {
-          btn.className = `size-btn-${productId} text-xs font-black py-2.5 sm:py-2 rounded-lg border-2 border-brand-orange bg-brand-orange text-black shadow-md scale-105 transition-all`;
+          btn.className = `size-btn-${productId} size-btn-pill active-size text-xs font-black py-2.5 sm:py-2 rounded-lg border-2 border-brand-orange bg-brand-orange text-black shadow-lg scale-105 transition-all`;
         } else {
-          btn.className = `size-btn-${productId} text-xs font-bold py-2.5 sm:py-2 rounded-lg border border-brand-border bg-brand-black text-gray-300 hover:border-brand-orange transition-all`;
+          btn.className = `size-btn-${productId} size-btn-pill text-xs font-bold py-2.5 sm:py-2 rounded-lg border border-brand-border bg-brand-black text-gray-300 hover:border-brand-orange transition-all`;
         }
       });
+    }
+
+    // DISPARAR ANIMAÇÃO BOUNCE NO ÍCONE DO CARRINHO
+    function triggerCartWiggle() {
+      const headerIcon = document.getElementById('cartHeaderIcon');
+      if (headerIcon) {
+        headerIcon.classList.remove('animate-cart-bounce');
+        // Force reflow
+        void headerIcon.offsetWidth;
+        headerIcon.classList.add('animate-cart-bounce');
+      }
     }
 
     // ADICIONAR AO CARRINHO (VALIDA TAMANHO)
@@ -723,6 +888,7 @@
       }
 
       updateCartUI();
+      triggerCartWiggle();
       showToast(`Adicionado: ${product.name} (Tam ${options.size})!`);
       openCart();
     }
@@ -756,7 +922,7 @@
       } else {
         proceedBtn.disabled = false;
         cartList.innerHTML = cart.map((item, index) => `
-          <div class="pt-4 first:pt-0 flex gap-3.5 items-center text-left">
+          <div class="pt-4 first:pt-0 flex gap-3.5 items-center text-left transition-all duration-200 hover:bg-brand-card/50 p-1 rounded-xl">
             <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl border border-brand-border bg-brand-black flex-shrink-0">
             <div class="flex-grow text-left">
               <h4 class="font-display font-black text-sm text-white uppercase italic leading-tight text-left">${item.name}</h4>
@@ -767,13 +933,13 @@
                 
                 <!-- Controle de Quantidade -->
                 <div class="flex items-center bg-brand-black border border-brand-border rounded-lg overflow-hidden">
-                  <button onclick="changeQuantity(${index}, -1)" class="px-2 py-1 text-gray-400 hover:text-white hover:bg-brand-border text-xs"><i class="fa-solid fa-minus"></i></button>
+                  <button onclick="changeQuantity(${index}, -1)" class="px-2 py-1 text-gray-400 hover:text-white hover:bg-brand-border text-xs transition-colors"><i class="fa-solid fa-minus"></i></button>
                   <span class="px-2 text-xs font-bold text-white">${item.quantity}</span>
-                  <button onclick="changeQuantity(${index}, 1)" class="px-2 py-1 text-gray-400 hover:text-white hover:bg-brand-border text-xs"><i class="fa-solid fa-plus"></i></button>
+                  <button onclick="changeQuantity(${index}, 1)" class="px-2 py-1 text-gray-400 hover:text-white hover:bg-brand-border text-xs transition-colors"><i class="fa-solid fa-plus"></i></button>
                 </div>
               </div>
             </div>
-            <button onclick="removeItem(${index})" class="text-gray-500 hover:text-red-400 p-2 transition-colors flex-shrink-0" title="Remover item">
+            <button onclick="removeItem(${index})" class="text-gray-500 hover:text-red-400 p-2 transition-transform hover:scale-110 flex-shrink-0" title="Remover item">
               <i class="fa-regular fa-trash-can"></i>
             </button>
           </div>
@@ -788,16 +954,18 @@
           cart.splice(index, 1);
         }
         updateCartUI();
+        triggerCartWiggle();
       }
     }
 
     function removeItem(index) {
       cart.splice(index, 1);
       updateCartUI();
+      triggerCartWiggle();
       showToast("Item removido do carrinho");
     }
 
-    // ABERTURA / FECHAMENTO DRAWER DO CARRINHO
+    // ABERTURA / FECHAMENTO DRAWER DO CARRINHO (TRANSITION SUAVE)
     function toggleCart() {
       const overlay = document.getElementById('cartOverlay');
       if (overlay.classList.contains('opacity-0')) {
@@ -948,21 +1116,27 @@
       showToast("Pedido gerado com sucesso! Redirecionando para o WhatsApp oficial...");
     }
 
-    // TOAST NOTIFICATION
+    // TOAST NOTIFICATION NO CANTO SUPERIOR DIREITO COM SLIDE SUAVE
+    let toastTimeout = null;
     function showToast(message, isWarning = false) {
       const toast = document.getElementById('toastNotification');
       const text = document.getElementById('toastMessage');
+      const icon = document.getElementById('toastIcon');
       text.textContent = message;
 
+      if (toastTimeout) clearTimeout(toastTimeout);
+
       if (isWarning) {
-        toast.className = "fixed bottom-6 right-6 z-50 bg-red-950/95 border-2 border-red-500 text-white px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl shadow-2xl transform translate-y-0 opacity-100 transition-all duration-300 flex items-center gap-3 max-w-[90vw] sm:max-w-md";
+        toast.className = "fixed top-24 right-4 sm:right-6 z-50 bg-red-950/95 border-2 border-red-500 text-white px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl shadow-2xl transform translate-x-0 opacity-100 pointer-events-auto transition-all duration-300 ease-out flex items-center gap-3 max-w-[92vw] sm:max-w-md";
+        icon.className = "fa-solid fa-triangle-exclamation text-red-400 text-lg sm:text-xl flex-shrink-0";
       } else {
-        toast.className = "fixed bottom-6 right-6 z-50 bg-brand-card border-2 border-brand-orange text-white px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl shadow-2xl transform translate-y-0 opacity-100 transition-all duration-300 flex items-center gap-3 max-w-[90vw] sm:max-w-md";
+        toast.className = "fixed top-24 right-4 sm:right-6 z-50 bg-brand-card/95 backdrop-blur-md border-2 border-brand-orange text-white px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl shadow-2xl shadow-orange-500/20 transform translate-x-0 opacity-100 pointer-events-auto transition-all duration-300 ease-out flex items-center gap-3 max-w-[92vw] sm:max-w-md";
+        icon.className = "fa-solid fa-circle-check text-brand-orange text-lg sm:text-xl flex-shrink-0 animate-bounce";
       }
 
-      setTimeout(() => {
-        toast.classList.add('translate-y-24', 'opacity-0');
-        toast.classList.remove('translate-y-0', 'opacity-100');
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('translate-x-24', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-x-0', 'opacity-100', 'pointer-events-auto');
       }, 3500);
     }
   </script>
